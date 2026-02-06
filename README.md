@@ -26,5 +26,15 @@ API REST para gerenciamento de clientes, com validação, paginação, soft dele
 1. Clone o repositório:
 
 ```bash
-git clone [https://github.com/seu-usuario/api-client.git](https://github.com/nicolaujoao1/api-client.git)
+git clone https://github.com/nicolaujoao1/api-client.git
 cd api-client
+
+dotnet restore
+
+dotnet run
+
+```
+
+Abrir em navegador o swagger:
+
+https://localhost:7251/swagger/index.html
