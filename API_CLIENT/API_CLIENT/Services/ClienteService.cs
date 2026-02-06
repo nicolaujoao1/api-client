@@ -1,4 +1,5 @@
-﻿using API_CLIENT.Models;
+﻿using API_CLIENT.Exceptions;
+using API_CLIENT.Models;
 using API_CLIENT.Pagination;
 using API_CLIENT.Repositories;
 using API_CLIENT.Requests;
@@ -18,11 +19,16 @@ namespace API_CLIENT.Services
         {
             var cliente = new Cliente
             {
-                Nome = request.Name,
+                Nome = request.Nome,
                 Email = request.Email
             };
 
-            return await _repository.CreateAsync(cliente, cancellationToken);
+            var createdCliente = await _repository.CreateAsync(cliente, cancellationToken);
+
+            if (createdCliente == null)
+                throw new BusinessException("Já existe um cliente cadastrado com este email.");
+
+            return createdCliente;
         }
 
         public async Task<PagedResult<Cliente>> GetClientesAsync(

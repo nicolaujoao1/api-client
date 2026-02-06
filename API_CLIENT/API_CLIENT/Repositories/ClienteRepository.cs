@@ -20,8 +20,9 @@ namespace API_CLIENT.Repositories
                .AnyAsync(c => c.Email == cliente.Email, cancellationToken);
 
             if (emailExiste)
-                throw new Exception("Já existe um cliente cadastrado com este email.");
+                return null!;
 
+            cliente.Id = Guid.NewGuid();
             await _context.Clientes!.AddAsync(cliente, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
